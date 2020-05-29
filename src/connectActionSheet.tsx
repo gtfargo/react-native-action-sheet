@@ -18,5 +18,9 @@ export default function connectActionSheet<OwnProps = any>(
     );
   };
 
-  return hoistNonReactStatic(ConnectedActionSheet, WrappedComponent);
+  const ForwardedComponent = React.forwardRef((props: OwnProps, ref) => {
+    return <ConnectedActionSheet {...props} forwardedRef={ref} />;
+  });
+
+  return hoistNonReactStatic(ForwardedComponent, WrappedComponent);
 }
